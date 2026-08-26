@@ -33,6 +33,11 @@ const validateEmail = (s: string) =>
 export const onRequestPost: PagesFunction<Env> = async (context) => {
   const { request, env } = context;
 
+  // 诊断日志：确认 D1 绑定是否生效
+  console.log('[contact] env keys:', Object.keys(env ?? {}));
+  console.log('[contact] env.DB type:', typeof env?.DB);
+  console.log('[contact] env.DB has prepare:', typeof env?.DB?.prepare);
+
   // 1. 校验 Content-Type
   const ct = request.headers.get('content-type') || '';
   if (!ct.includes('application/json')) {
@@ -63,6 +68,22 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   }
 
   // 4. 写入 D1（prepared statement 防 SQL 注入）
+  if (!env.DB || typeof env.DB.prepare !== 'function') {
+    console.error('[contact] D1 binding missing or invalid. env.DB =', env.DB);
+    return json(
+      {
+        ok: false,
+        error:
+          'D1 数据库绑定未生效。请在 Cloudflare 控制台确认 Pages 项目 → Settings → Functions → D1 database bindings 里已添加 DB → mengyu-lab-messages，并触发重新部署（参考 docs/p3-form-and-d1.md）。',
+        debug: {
+          envKeys: Object.keys(env ?? {}),
+          dbType: typeof env?.DB,
+        },
+      },
+      500
+    );
+  }
+
   try {
     const result = await env.DB
       .prepare(
