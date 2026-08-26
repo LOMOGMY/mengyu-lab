@@ -88,16 +88,20 @@
   ├── LEARNING.md          ← 学习路线总览
   ├── README.md            ← 项目对外说明
   ├── docs/                ← 各阶段图文教程（人读）
-  │   ├── p1-first-page.md
-  │   ├── p2-multi-page.md
-  │   └── ...
   ├── public/              ← 静态资源（图片、字体）
-  ├── src/                 ← 源代码（HTML/CSS/JS）
+  ├── src/                 ← 静态源代码（HTML/CSS/JS），是 Build output directory
   │   ├── index.html
   │   ├── styles/
-  │   └── scripts/
-  ├── functions/           ← Cloudflare Pages Functions（从 P3 开始）
+  │   ├── scripts/
+  │   ├── projects/        ← 项目详情页
+  │   ├── blog/            ← 随笔页
+  │   └── contact/         ← 联系表单页
+  ├── functions/           ← Cloudflare Pages Functions（必须在仓库根，不能放 src/ 里）
   │   └── api/
+  │       ├── contact.ts
+  │       └── messages.ts
+  ├── db/
+  │   └── schema.sql       ← D1 建表 SQL
   └── wrangler.toml        ← Cloudflare 本地开发 + 部署配置（从 P3 开始）
   ```
 

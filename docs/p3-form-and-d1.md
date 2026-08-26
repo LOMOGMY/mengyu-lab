@@ -19,13 +19,32 @@
 
 **4 件新东西**：
 1. `src/contact/index.html` — 联系表单页面（已写好）
-2. `src/functions/api/contact.ts` — POST 端点，接收表单数据、写入 D1（已写好）
-3. `src/functions/api/messages.ts` — GET 端点，读取留言列表（已写好）
+2. `functions/api/contact.ts` — POST 端点，接收表单数据、写入 D1（已写好）
+3. `functions/api/messages.ts` — GET 端点，读取留言列表（已写好）
 4. **D1 数据库** — 实际存储留言的地方（**你需要去控制台创建**）
 
 **关键概念（务必先理解）**：
 - **绑定（Binding）**：你的 Function 代码里 `context.env.DB` 这个变量，默认是空的。必须去 Cloudflare 控制台把 D1 数据库"绑"到这个 Pages 项目上，绑定后代码才能拿到 `env.DB` 这个对象。
 - **不用纠结 wrangler 命令**：P3 我们用 Cloudflare 控制台的网页操作完成所有事情，不要求你用命令行。
+
+**⚠️ Functions 必须放在仓库根（不是 src/ 里）**
+
+> Cloudflare Pages 寻找 Functions 的路径约定：`/functions` 必须在项目根，**不在 Build output directory（如 `src/`、`dist/`）里**。
+>
+> 这个坑我们一开始踩了：把 `functions/` 放在了 `src/functions/`，结果是 POST 报 HTTP 405（Cloudflare 找不到 Function，只能返回默认的 405 Method Not Allowed）。
+>
+> 最终目录布局：
+> ```text
+> mengyu-lab/
+> ├── functions/            ← Pages Functions（仓库根）
+> │   └── api/
+> │       ├── contact.ts
+> │       └── messages.ts
+> ├── src/                  ← 静态资源（Build output directory）
+> │   ├── index.html
+> │   └── contact/index.html
+> └── wrangler.toml
+> ```
 
 ---
 
