@@ -116,7 +116,16 @@
 > 你要"绑"一下，告诉 Cloudflare："我这个 Pages 项目要用这个 D1 数据库，对应变量名叫 `DB`"。
 > 绑完后，你 Function 代码里的 `context.env.DB` 才会真的指向这个数据库。
 
-1. 进入你的 Pages 项目 → **Settings**（设置）标签
+**⚠️ 重要：先看你的项目里有没有 `wrangler.toml`！**
+
+| 情况 | 怎么做 |
+| --- | --- |
+| 仓库根目录**没有** `wrangler.toml` | 在 Cloudflare 控制台 → Settings → D1 database bindings 添加（控制台 UI 可用） |
+| 仓库根目录**有** `wrangler.toml` | 控制台 UI **会被禁用**，必须在 `wrangler.toml` 里配置。下方有详细步骤 |
+
+**情况 A：控制台管理（无 wrangler.toml）**
+
+1. 进入 Pages 项目 → **Settings**（设置）标签
 2. 在左侧菜单找到 **Functions** 区块
 3. 找到 **D1 database bindings**（或 "D1 数据库绑定"）
 4. 点 **Add binding**（添加绑定）或 **Edit**（编辑）
@@ -124,6 +133,26 @@
    - ⚠️ **必须大写 `DB`**，因为代码里写的是 `env.DB`。变量名一旦定下来，要改就得同时改代码。
 6. **D1 database**（数据库）下拉框选你刚才创建的 `mengyu-lab-messages`
 7. 点 **Save** 保存
+
+**情况 B：wrangler.toml 管理（有 wrangler.toml——本项目是这种）**
+
+我们的项目根目录有 `wrangler.toml`，所以**所有绑定必须写在里面**，控制台 UI 会显示「此项目的绑定在通过 wrangler.toml 进行管理」。
+
+`wrangler.toml` 关键段落：
+
+```toml
+[[d1_databases]]
+binding = "DB"                              # 在 Function 里叫 env.DB
+database_name = "mengyu-lab-messages"       # 数据库名
+database_id = "23e80796-c308-4fdb-9514-..."  # 在 D1 控制台查
+```
+
+**怎么查 database_id**：
+1. Cloudflare Dashboard → **Workers & Pages** → **D1**
+2. 点 `mengyu-lab-messages` 数据库
+3. **Database ID** 字段就是它（一串 UUID）
+
+**常见坑**：`wrangler.toml` 里如果 `database_id` 被注释掉（`#` 开头）或填错，Cloudflare 部署时**不会报错**（因为文件语法合法），但运行时 `env.DB` 会是 undefined。提交后**必须确认 wrangler.toml 里的 ID 跟你 D1 控制台看到的一致**。
 
 ---
 
@@ -172,13 +201,25 @@
 - 去 D1 Console 执行 `SELECT name FROM sqlite_master WHERE type='table';`
 - 如果列表里没有 `messages`，回去执行动作 3
 
-### Q2：提交时显示 "数据库写入失败" 或 HTTP 500
-**原因**：D1 绑定没生效。
+### Q2：提交时显示 "D1 数据库绑定未生效" 或 "Cannot read properties of undefined (reading 'prepare')"
+**原因**：`env.DB` 是 undefined，绑定没生效。
 
-**排查**：
-- 去 Pages 项目 → Settings → Functions → D1 database bindings
-- 确认绑定存在、变量名是 `DB`（大写）、数据库选的是 `mengyu-lab-messages`
-- **重新触发一次部署**（绑定改了之后必须重部署才生效）
+**排查（按顺序）**：
+
+1. **检查 wrangler.toml**
+   - 如果项目根有 `wrangler.toml`，确认 `[[d1_databases]]` 段里的 `database_id` 是填好的、正确的
+   - 去 D1 控制台核对 UUID 一致
+
+2. **检查控制台状态**
+   - 进 Pages 项目 → Settings → Functions → D1 database bindings
+   - 如果提示「此项目的绑定在通过 wrangler.toml 进行管理」，说明绑定归 wrangler 管，**控制台是空的、不能操作**
+   - 这种情况下只能改 wrangler.toml
+
+3. **重新部署**
+   - 改完 wrangler.toml 后，Cloudflare **不会自动**重新部署（push 才触发）
+   - 用 `git push` 推送，等待新部署
+
+4. **浏览器强制刷新**（Ctrl+Shift+R），缓存的旧 Function 可能还在跑
 
 ### Q3：访问 /contact/ 报 404
 **原因**：可能 Cloudflare 在重新部署。
@@ -199,6 +240,11 @@
 **原因**：极少数情况下 Pages 项目没启用 Functions。
 
 **修复**：在 Pages 项目 → Settings → Functions → **Compatibility flags** 区域，确认 Production 兼容性已开启。一般默认就是开的。
+
+### Q6：控制台点击"添加绑定"按钮没反应
+**原因**：项目根目录有 `wrangler.toml`，控制台 UI 被锁定。
+
+**修复**：所有绑定都写到 `wrangler.toml` 里，参见动作 4 的「情况 B」。
 
 ---
 
