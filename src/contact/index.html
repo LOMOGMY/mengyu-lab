@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>联系我 · 葛孟雨</title>
+  <meta name="description" content="给葛孟雨留言 — 表单提交后会保存到 Cloudflare D1 数据库。" />
+  <link rel="stylesheet" href="../styles/main.css" />
+  <link rel="stylesheet" href="../styles/page.css" />
+  <link rel="stylesheet" href="../styles/contact.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a href="../index.html" class="brand">葛孟雨<span class="brand-en">· Ge Mengyu</span></a>
+      <nav class="nav-links" aria-label="主导航">
+        <a href="../index.html#about">关于</a>
+        <a href="../index.html#experience">经历</a>
+        <a href="../projects/index.html">项目</a>
+        <a href="../index.html#publications">论文</a>
+        <a href="../blog/index.html">随笔</a>
+        <a href="index.html" class="active">联系</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-contact">
+    <div class="container">
+      <a class="back-link" href="../index.html">← 返回首页</a>
+
+      <header class="page-header">
+        <h1>联系我</h1>
+        <p class="muted">提交后会保存到 Cloudflare D1 数据库（P3 学习成果）</p>
+      </header>
+
+      <div class="contact-grid">
+        <!-- 表单卡片 -->
+        <article class="card">
+          <h3>留言</h3>
+          <form id="contact-form" class="contact-form" novalidate>
+            <div class="field">
+              <label for="name">姓名</label>
+              <input id="name" name="name" type="text" required maxlength="50" placeholder="你的名字" />
+            </div>
+            <div class="field">
+              <label for="email">邮箱</label>
+              <input id="email" name="email" type="email" required maxlength="100" placeholder="you@example.com" />
+            </div>
+            <div class="field">
+              <label for="message">留言内容</label>
+              <textarea id="message" name="message" required rows="5" maxlength="1000" placeholder="想说点什么…"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" id="submit-btn">提交留言</button>
+            <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+          </form>
+        </article>
+
+        <!-- 联系方式卡片 -->
+        <article class="card">
+          <h3>直接联系</h3>
+          <ul class="bullets">
+            <li><strong>邮箱：</strong><a href="mailto:lomo123456@foxmail.com">lomo123456@foxmail.com</a></li>
+            <li><strong>电话：</strong><a href="tel:+8613066825961">+86 13066825961</a></li>
+            <li><strong>所在城市：</strong>深圳</li>
+          </ul>
+          <h3 class="mt">提示</h3>
+          <p class="muted">
+            提交留言后，数据会保存在 Cloudflare D1 数据库（边缘 SQLite）中。
+            在 P3 阶段，你将学会如何：
+          </p>
+          <ul class="bullets">
+            <li>在 Cloudflare 控制台创建 D1 数据库</li>
+            <li>运行建表 SQL</li>
+            <li>把 D1 绑定到 Pages 项目</li>
+            <li>通过 Pages Function 处理表单</li>
+          </ul>
+        </article>
+      </div>
+
+      <!-- 留言列表（从 D1 读取） -->
+      <section class="card messages-section">
+        <h3>最近的留言 <span class="muted" id="messages-count"></span></h3>
+        <div id="messages-list" class="messages-list">
+          <p class="muted">加载中…</p>
+        </div>
+        <button id="reload-messages" class="btn btn-ghost" type="button">刷新留言</button>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2026 葛孟雨 · Ge Mengyu. Built as a learning project.</p>
+    </div>
+  </footer>
+
+  <script src="../scripts/contact.js"></script>
+</body>
+</html>

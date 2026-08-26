@@ -28,6 +28,9 @@ mengyu-lab/
 ├── AGENTS.md            ← 项目背景与协作约定
 ├── README.md            ← 本文件
 ├── docs/                ← 学习教程
+├── db/
+│   └── schema.sql       ← D1 建表语句（在 Cloudflare 控制台执行）
+├── wrangler.toml        ← Cloudflare Pages 配置
 └── src/                 ← 网站源代码
     ├── index.html              ← 首页
     ├── projects/               ← 项目页
@@ -37,10 +40,19 @@ mengyu-lab/
     │   └── rb-scheduling.html
     ├── blog/                   ← 随笔/博客页
     │   └── index.html
+    ├── contact/                ← 联系表单页（P3 新增）
+    │   └── index.html
+    ├── functions/              ← Cloudflare Pages Functions（P3 新增）
+    │   └── api/
+    │       ├── contact.ts      ← POST /api/contact
+    │       └── messages.ts     ← GET /api/messages
     ├── styles/
     │   ├── main.css            ← 共享样式
-    │   └── page.css            ← 详情页/列表页样式
-    └── scripts/main.js         ← 共享脚本
+    │   ├── page.css            ← 详情页/列表页样式
+    │   └── contact.css         ← 联系表单样式
+    └── scripts/
+        ├── main.js             ← 首页脚本
+        └── contact.js          ← 联系表单脚本
 ```
 
 ## 技术栈
