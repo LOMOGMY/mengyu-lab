@@ -118,3 +118,15 @@
 
 /* 当前页导航高亮 */
 .nav-links a.active { color: var(--c-primary); }
+
+/* Turnstile 提示（P4 新增） */
+.turnstile-hint {
+  margin: 0;
+  font-size: 13px;
+  min-height: 1.4em;
+}
+
+/* Turnstile widget 容器间距 */
+.cf-turnstile {
+  margin: 4px 0;
+}

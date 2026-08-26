@@ -8,6 +8,10 @@
   <link rel="stylesheet" href="../styles/main.css" />
   <link rel="stylesheet" href="../styles/page.css" />
   <link rel="stylesheet" href="../styles/contact.css" />
+
+  <!-- Cloudflare Turnstile SDK（反机器人验证，P4 阶段新增） -->
+  <!-- site key 是公开的，可以直接放前端 -->
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onTurnstileLoad" async defer></script>
 </head>
 <body>
   <header class="site-header">
@@ -50,7 +54,10 @@
               <label for="message">留言内容</label>
               <textarea id="message" name="message" required rows="5" maxlength="1000" placeholder="想说点什么…"></textarea>
             </div>
-            <button type="submit" class="btn btn-primary" id="submit-btn">提交留言</button>
+            <!-- Turnstile 验证组件（Managed 模式：通常用户无感知） -->
+            <div class="cf-turnstile" data-sitekey="YOUR_TURNSTILE_SITE_KEY" data-callback="onTurnstileSuccess"></div>
+            <p id="turnstile-hint" class="muted turnstile-hint">正在加载人机验证…</p>
+            <button type="submit" class="btn btn-primary" id="submit-btn" disabled>提交留言</button>
             <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
           </form>
         </article>

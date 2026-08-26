@@ -13,12 +13,15 @@
 interface Env {
   // D1 数据库绑定（你在 Cloudflare 控制台绑定时设置的变量名）
   DB: D1Database;
+  // Turnstile secret key（通过 `wrangler secret put TURNSTILE_SECRET` 设置）
+  TURNSTILE_SECRET?: string;
 }
 
 interface ContactPayload {
   name?: unknown;
   email?: unknown;
   message?: unknown;
+  turnstileToken?: unknown;
 }
 
 const json = (data: unknown, status = 200) =>
@@ -30,6 +33,25 @@ const json = (data: unknown, status = 200) =>
 const validateEmail = (s: string) =>
   /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s);
 
+/**
+ * 验证 Cloudflare Turnstile token
+ * 通过 Cloudflare 官方 siteverify API 确认 token 有效
+ */
+async function verifyTurnstile(token: string, secret: string, remoteIp?: string): Promise<boolean> {
+  const formData = new URLSearchParams();
+  formData.append('secret', secret);
+  formData.append('response', token);
+  if (remoteIp) formData.append('remoteip', remoteIp);
+
+  const res = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+    method: 'POST',
+    body: formData,
+  });
+  if (!res.ok) return false;
+  const data = (await res.json()) as { success?: boolean };
+  return data.success === true;
+}
+
 export const onRequestPost: PagesFunction<Env> = async (context) => {
   const { request, env } = context;
 
@@ -37,6 +59,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   console.log('[contact] env keys:', Object.keys(env ?? {}));
   console.log('[contact] env.DB type:', typeof env?.DB);
   console.log('[contact] env.DB has prepare:', typeof env?.DB?.prepare);
+  console.log('[contact] env.TURNSTILE_SECRET present:', !!env.TURNSTILE_SECRET);
 
   // 1. 校验 Content-Type
   const ct = request.headers.get('content-type') || '';
@@ -52,7 +75,32 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     return json({ ok: false, error: 'JSON 解析失败' }, 400);
   }
 
-  // 3. 校验字段
+  // 3. 校验 Turnstile token（P4 新增：先反垃圾，再校验业务字段）
+  const turnstileToken = typeof body.turnstileToken === 'string' ? body.turnstileToken : '';
+  if (!turnstileToken) {
+    return json({ ok: false, error: '缺少人机验证 token，请完成验证后重试。' }, 400);
+  }
+  if (!env.TURNSTILE_SECRET) {
+    console.error('[contact] TURNSTILE_SECRET not set');
+    return json(
+      {
+        ok: false,
+        error:
+          '服务端 TURNSTILE_SECRET 未配置。请按 docs/p4-turnstile.md 完成 wrangler secret 配置。',
+      },
+      500
+    );
+  }
+  const remoteIp = request.headers.get('cf-connecting-ip') || undefined;
+  const turnstileOk = await verifyTurnstile(turnstileToken, env.TURNSTILE_SECRET, remoteIp);
+  if (!turnstileOk) {
+    return json(
+      { ok: false, error: '人机验证失败，请刷新页面重试。' },
+      400
+    );
+  }
+
+  // 4. 校验字段
   const name = typeof body.name === 'string' ? body.name.trim() : '';
   const email = typeof body.email === 'string' ? body.email.trim() : '';
   const message = typeof body.message === 'string' ? body.message.trim() : '';
@@ -67,7 +115,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     return json({ ok: false, error: '邮箱格式不正确' }, 400);
   }
 
-  // 4. 写入 D1（prepared statement 防 SQL 注入）
+  // 5. 写入 D1（prepared statement 防 SQL 注入）
   if (!env.DB || typeof env.DB.prepare !== 'function') {
     console.error('[contact] D1 binding missing or invalid. env.DB =', env.DB);
     return json(
