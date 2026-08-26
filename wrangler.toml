@@ -1,20 +1,36 @@
 # wrangler.toml
-# Cloudflare Workers / Pages 的配置文件。
-# 我们用它来配置本地开发时与 D1 的绑定。
+# Cloudflare Pages 的配置文件。
 #
-# 生产环境（线上）的 D1 绑定，是在 Cloudflare 控制台手动做的，
-# 不需要在这里写 database_id —— Cloudflare 会通过 dashboard 注入。
+# 当仓库根目录有 wrangler.toml 时，Cloudflare Pages 会用它来管理
+# 所有 bindings（KV、D1、R2、AI 等）。控制台的绑定 UI 会被禁用，
+# 显示「此项目的绑定在通过 wrangler.toml 进行管理」。
+#
+# 因此：所有绑定都必须写在这里，不能再去控制台点。
 
 name = "mengyu-lab"
 compatibility_date = "2024-09-23"
 pages_build_output_dir = "./src"
 
-# 本地开发用的 D1 绑定：
-# 运行 `wrangler pages dev` 时，会自动使用 miniflare 在本地跑一个 SQLite。
-# 这个 database_id 在你执行 `wrangler d1 create mengyu-lab-messages` 后得到。
-# 先注释掉，等你在控制台创建完 D1，把 id 填进来再启用：
+# ---------- D1 数据库绑定 ----------
+# database_id 在 Cloudflare Dashboard -> Workers & Pages -> D1 ->
+# 点击对应数据库 -> Database ID 字段。
+[[d1_databases]]
+binding = "DB"
+database_name = "mengyu-lab-messages"
+database_id = "23e80796-c308-4fdb-9514-e6bd052234db"
+
+# ---------- 未来要加的 binding ----------
+# 比如：
 #
-# [[d1_databases]]
-# binding = "DB"
-# database_name = "mengyu-lab-messages"
-# database_id = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+# KV 命名空间：
+# [[kv_namespaces]]
+# binding = "MY_KV"
+# id = "<kv-namespace-id>"
+#
+# 环境变量（Secrets）：
+# [vars]
+# MY_PUBLIC_VAR = "hello"
+#
+# [env.production.vars]
+# MY_SECRET = "xxx"  # 注意：Secrets 应通过 `wrangler secret put` 设置，
+#                     #      不要直接写在这里。
