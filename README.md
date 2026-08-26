@@ -27,11 +27,20 @@ npx serve
 mengyu-lab/
 ├── AGENTS.md            ← 项目背景与协作约定
 ├── README.md            ← 本文件
-├── src/                 ← 网站源代码
-│   ├── index.html
-│   ├── styles/main.css
-│   └── scripts/main.js
-└── public/              ← 静态资源（图片等，后续阶段会用到）
+├── docs/                ← 学习教程
+└── src/                 ← 网站源代码
+    ├── index.html              ← 首页
+    ├── projects/               ← 项目页
+    │   ├── index.html
+    │   ├── embodied-brain.html
+    │   ├── ai-amc.html
+    │   └── rb-scheduling.html
+    ├── blog/                   ← 随笔/博客页
+    │   └── index.html
+    ├── styles/
+    │   ├── main.css            ← 共享样式
+    │   └── page.css            ← 详情页/列表页样式
+    └── scripts/main.js         ← 共享脚本
 ```
 
 ## 技术栈
