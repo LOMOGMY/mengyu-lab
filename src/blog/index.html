@@ -4,21 +4,38 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>随笔 · 葛孟雨</title>
-  <meta name="description" content="葛孟雨的技术随笔与学习笔记。" />
+  <meta name="description" content="葛孟雨的技术随笔 — 关于大模型、强化学习、具身智能和工程实践的笔记。" />
+  <meta name="author" content="葛孟雨" />
+  <meta name="theme-color" content="#4f46e5" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="随笔 · 葛孟雨" />
+  <meta property="og:description" content="技术随笔 — 大模型、强化学习、具身智能。" />
+  <meta property="og:image" content="/assets/images/avatar.jpg" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon-180.png" />
+  <link rel="manifest" href="/manifest.json" />
+
   <link rel="stylesheet" href="../styles/main.css" />
   <link rel="stylesheet" href="../styles/page.css" />
 </head>
 <body>
   <header class="site-header">
     <div class="container nav">
-      <a href="../index.html" class="brand">葛孟雨<span class="brand-en">· Ge Mengyu</span></a>
+      <a href="../index.html" class="brand">
+        <span class="brand-mark" aria-hidden="true" style="background-image:url('/assets/images/avatar-200.jpg')"></span>
+        葛孟雨<span class="brand-en">· Ge Mengyu</span>
+      </a>
       <nav class="nav-links" aria-label="主导航">
         <a href="../index.html#about">关于</a>
         <a href="../index.html#experience">经历</a>
         <a href="../projects/index.html">项目</a>
         <a href="../index.html#publications">论文</a>
-        <a href="index.html">随笔</a>
-        <a href="../index.html#contact">联系</a>
+        <a href="index.html" class="active">随笔</a>
+        <a href="../contact/index.html">联系</a>
       </nav>
     </div>
   </header>
@@ -26,59 +43,59 @@
   <main class="page-list">
     <div class="container">
       <header class="page-header">
-        <h1>随笔 / 博客</h1>
+        <h1>随笔</h1>
         <p class="muted">Notes &amp; Thoughts</p>
       </header>
 
       <article class="card post">
         <div class="card-meta">
           <span class="tag tag-vlm">VLM</span>
-          <span class="time">2026-08-26 · 学习中</span>
+          <span class="time">2026-08-26</span>
         </div>
         <h3>为什么选择 Cloudflare Pages 作为个人网站部署平台</h3>
         <p>
-          这是本站的建站记录。我调研了 Vercel、Netlify、GitHub Pages 和 Cloudflare Pages，最终选择了 Cloudflare。
-          原因是它的免费额度覆盖了静态托管 + Functions + D1 数据库一条线，对学习者最友好。
+          调研过 Vercel、Netlify、GitHub Pages 和 Cloudflare Pages，
+          最终选择 Cloudflare 的原因是它的免费额度覆盖了静态托管、Serverless Functions、
+          边缘 SQLite 数据库（D1）一条完整的链路。
         </p>
         <p class="muted">
-          完整记录见 <a href="../index.html">项目首页</a> 与 <code>AGENTS.md</code>。
+          对一个想长期维护个人网站的人来说，单一供应商就能撑起从静态页面到带数据交互的留言板，
+          是一个很优雅的折中。
         </p>
       </article>
 
       <article class="card post">
         <div class="card-meta">
           <span class="tag tag-rl">RL</span>
-          <span class="time">占位</span>
+          <span class="time">即将更新</span>
         </div>
-        <h3>待写：从 DQN 到 MAPPO —— 强化学习在通信调度中的演进</h3>
-        <p class="muted">
-          占位文章。这个项目从 AI-AMC（DQN 单智能体）演进到簇间 RB 调度（MAPPO 多智能体），
-          未来我会写一篇技术博客总结这条路。
+        <h3>从 DQN 到 MAPPO —— 强化学习在通信调度中的演进</h3>
+        <p>
+          这个项目从 AI-AMC（DQN 单智能体）演进到簇间 RB 调度（MAPPO 多智能体），
+          接下来准备写一篇技术笔记总结这条路——包括状态空间设计、Reward Shaping 的细节、
+          和从单智能体到 CTDE 架构的迁移经验。
         </p>
       </article>
 
       <article class="card post">
         <div class="card-meta">
           <span class="tag tag-marl">Embodied AI</span>
-          <span class="time">占位</span>
+          <span class="time">即将更新</span>
         </div>
-        <h3>待写：Step-GRPO —— 拆解长视野任务的奖励设计</h3>
-        <p class="muted">
-          占位文章。Step-GRPO 是我在 EmbodiedBrain 项目里的核心创新点，
-          后面我会详细写它的设计动机、稀疏奖励问题、和消融实验。
+        <h3>Step-GRPO —— 拆解长视野任务的奖励设计</h3>
+        <p>
+          Step-GRPO 是我在 EmbodiedBrain 项目里的核心创新点。
+          后续会详细写它的设计动机：为什么标准的 GRPO 在长视野任务规划中失效，
+          稀疏奖励问题怎么拆解，以及消融实验的几个关键发现。
         </p>
       </article>
-
-      <p class="hint">
-        💡 想发布新文章？复制 <code>blog/index.html</code> 里的一个 <code>&lt;article class="card post"&gt;</code> 块，
-        修改标题和内容即可。下一阶段（P5+）会考虑接入 Markdown 自动渲染或简单的 CMS。
-      </p>
     </div>
   </main>
 
   <footer class="site-footer">
     <div class="container">
-      <p>© 2026 葛孟雨 · Ge Mengyu. Built as a learning project.</p>
+      <span>© 2026 葛孟雨 · Ge Mengyu</span>
+      <span><a href="../contact/index.html">联系方式</a></span>
     </div>
   </footer>
 </body>

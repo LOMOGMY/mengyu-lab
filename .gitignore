@@ -7,3 +7,8 @@ node_modules/
 # 工具链私有目录
 .claude/
 .wrangler/
+
+# 用户放进根目录的源照片（不要直接进 git，先 mv 到 src/assets/images/ 后再 add）
+生活照*.jpg
+*.HEIC
+*.heic

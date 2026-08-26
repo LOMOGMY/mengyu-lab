@@ -59,9 +59,10 @@
 | **P0** | 项目初始化 + 工具链搭建 | `AGENTS.md` / `LEARNING.md` / 目录结构 / 本地预览脚本 | ✅ 已完成 |
 | **P1** | 第一个静态页面 | 一个 `index.html`，部署到 Cloudflare Pages | ✅ 已完成 |
 | **P2** | 内容扩展 | 多页面（项目详情 + 博客） + 卡片化样式 | ✅ 已完成 |
-| **P3** | 加入交互 + 数据库 | 联系表单 + Pages Functions + D1 | 🚧 当前阶段 |
-| **P4**（可选） | 进阶 | Turnstile 反垃圾 / 分页 / Access 管理后台 | ⏳ |
-| **P5**（可选） | 进阶 | 自定义域名 / 分析 / 博客系统 / RSS | ⏳ |
+| **P3** | 加入交互 + 数据库 | 联系表单 + Pages Functions + D1 | ✅ 已完成 |
+| **P4** | 加固 | Cloudflare Turnstile 反机器人验证 | ✅ 已完成 |
+| **P5** | 产品化打磨 | 照片集成 + 现代专业调性 + PWA + Open Graph | ✅ 已完成 |
+| **未来** | 可选扩展 | 自定义域名 / 分页 / Access 管理后台 / 分析 | ⏳ |
 
 每个阶段结束后，都会**真实部署一次**，确保你看到“代码 → 线上”的完整链路。
 
@@ -108,7 +109,16 @@
   ```
 
 - **提交规范**：使用 Conventional Commits（如 `feat: add about page`、`docs: p1 deployment guide`）。
-- **每次“完成一个可部署的小阶段”就 commit + push 一次**，触发 Cloudflare 自动部署。
+- **每次”完成一个可部署的小阶段”就 commit + push 一次**，触发 Cloudflare 自动部署。
+
+### 3.3 项目最终调性
+
+经过 P5 阶段后，网站已从”学习项目”升级为可长期对外展示的**生产级个人主页**：
+
+- 主色靛蓝 `#4f46e5` + 暖橙点缀 `#f59e0b`，低饱和、克制
+- 响应式照片布局（Hero 头像 + 关于区装饰图）
+- 完整 SEO / Open Graph / Favicon / PWA Manifest
+- 所有”学习项目”类表述已移除，文案按专业个人主页标准重写
 
 ### 3.3 沟通约定
 
@@ -184,6 +194,8 @@ A：可以，但建议先按既定路线走完一遍。如果你学完 P2 后特
 | 2026-08-26 | P1：第一个静态页面 + 部署到 Cloudflare Pages | AI Agent + 你 |
 | 2026-08-26 | P2：多页面架构（项目详情 + 博客）+ 自动部署演示 | AI Agent + 你 |
 | 2026-08-26 | P3：联系表单 + Pages Functions + D1 数据库 | AI Agent + 你 |
+| 2026-08-26 | P4：Cloudflare Turnstile 反机器人验证 | AI Agent + 你 |
+| 2026-08-26 | P5：照片集成 / 现代专业调性 / PWA / Open Graph / 全文档整合 | AI Agent + 你 |
 
 ---
 

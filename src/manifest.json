@@ -1,0 +1,24 @@
+{
+  "name": "葛孟雨 · Ge Mengyu",
+  "short_name": "Mengyu Lab",
+  "description": "AI 算法工程师，专注于大语言模型、具身智能与强化学习。",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#4f46e5",
+  "lang": "zh-CN",
+  "icons": [
+    {
+      "src": "/assets/images/favicon-180.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/images/favicon-32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    }
+  ]
+}
