@@ -3,3 +3,6 @@ __pycache__/
 *.pyc
 .DS_Store
 node_modules/
+
+# 工具链私有目录
+.claude/

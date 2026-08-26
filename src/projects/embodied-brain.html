@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EmbodiedBrain · 葛孟雨</title>
+  <meta name="description" content="具身智能视觉语言大模型 (VLM) 后训练项目。" />
+  <link rel="stylesheet" href="../styles/main.css" />
+  <link rel="stylesheet" href="../styles/page.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a href="../index.html" class="brand">葛孟雨<span class="brand-en">· Ge Mengyu</span></a>
+      <nav class="nav-links" aria-label="主导航">
+        <a href="../index.html#about">关于</a>
+        <a href="../index.html#experience">经历</a>
+        <a href="index.html">项目</a>
+        <a href="../index.html#publications">论文</a>
+        <a href="../blog/index.html">随笔</a>
+        <a href="../index.html#contact">联系</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-detail">
+    <div class="container">
+      <a class="back-link" href="index.html">← 返回项目列表</a>
+
+      <header class="page-header">
+        <span class="tag tag-vlm">VLM · Embodied AI</span>
+        <h1>EmbodiedBrain：具身智能视觉语言大模型后训练</h1>
+        <p class="muted">2025.03 – 至今 · 中兴通讯 · 大模型算法工程师</p>
+      </header>
+
+      <section class="card">
+        <h3>项目背景与痛点</h3>
+        <p>现有大模型应用于物理机器人时普遍存在三个行业痛点：</p>
+        <ul class="bullets">
+          <li><strong>模型设计与物理系统约束脱节</strong>：算法在仿真里跑得好，下发到真实机器人就失效。</li>
+          <li><strong>推理延迟与性能难以平衡</strong>：规划任务越长，模型响应越慢，难以满足在线决策需求。</li>
+          <li><strong>传统离线评测指标无法反映真实物理世界复杂度</strong>：榜单分高不代表能落地。</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h3>核心算法研发（后训练 &amp; 强化学习）</h3>
+        <p>参与公司核心具身智能大脑 <strong>EmbodiedBrain (7B / 32B)</strong> 的研发与后训练全流程，覆盖 SFT、GRPO、DAPO、GSPO 等算法。</p>
+        <p><strong>主导落地创新性的 Step-GRPO 算法</strong>：通过将长序列规划任务拆解，并引入前置步骤作为引导前缀，有效解决了强化学习过程中的稀疏奖励问题，大幅提升模型在长视野复杂任务规划中的成功率。</p>
+      </section>
+
+      <section class="card">
+        <h3>多模态奖励系统设计</h3>
+        <ul class="bullets">
+          <li>设计并实现了一套综合奖励机制，引入<strong>生成式奖励模型 (GRM)</strong> 评估模型输出格式的准确性与规划的合理性。</li>
+          <li>为解决计算瓶颈，在底层架构上实现了<strong>异步优化计算机制</strong>，将端到端强化学习的训练时间缩短约 20%，且未损耗模型精度。</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h3>Agentic 交互学习与在线蒸馏（OPD）</h3>
+        <ul class="bullets">
+          <li>构建<strong>高保真沙盒仿真环境</strong>并定义多维奖励函数，实现大模型在封闭环境下的自主交互试错（Agentic Training）。</li>
+          <li>引入 <strong>OPD (On-Policy Distillation)</strong> 技术：利用教师模型在交互轨迹上的实时指导对学生模型进行在线蒸馏，有效缓解分布偏移问题。</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h3>业务收益与产出</h3>
+        <ul class="bullets">
+          <li>训练出的 EmbodiedBrain 模型在通用多模态、空间感知及任务规划等 <strong>14 项基准测试</strong>中达到 SOTA。</li>
+          <li>其中 <strong>32B 模型在极具挑战的 VLM-PlanSim-99 真实仿真任务中取得 46.46% 的成功率</strong>，以近乎翻倍的优势超越同期头部基线模型。</li>
+          <li>相关论文：<em>EmbodiedBrain: Expanding Performance Boundaries of Task Planning for Embodied Intelligence</em>，arXiv:2510.20578。</li>
+        </ul>
+        <p>
+          <a class="card-link" href="https://zterobot.github.io/EmbodiedBrain.github.io/" target="_blank" rel="noopener">
+            项目主页 →
+          </a>
+        </p>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2026 葛孟雨 · Ge Mengyu. Built as a learning project.</p>
+    </div>
+  </footer>
+</body>
+</html>

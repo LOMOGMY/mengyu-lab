@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI-AMC · 葛孟雨</title>
+  <meta name="description" content="5G/6G 智能自适应调制编码 (AI-AMC) 项目。" />
+  <link rel="stylesheet" href="../styles/main.css" />
+  <link rel="stylesheet" href="../styles/page.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a href="../index.html" class="brand">葛孟雨<span class="brand-en">· Ge Mengyu</span></a>
+      <nav class="nav-links" aria-label="主导航">
+        <a href="../index.html#about">关于</a>
+        <a href="../index.html#experience">经历</a>
+        <a href="index.html">项目</a>
+        <a href="../index.html#publications">论文</a>
+        <a href="../blog/index.html">随笔</a>
+        <a href="../index.html#contact">联系</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-detail">
+    <div class="container">
+      <a class="back-link" href="index.html">← 返回项目列表</a>
+
+      <header class="page-header">
+        <span class="tag tag-rl">Reinforcement Learning</span>
+        <h1>5G/6G 智能自适应调制编码 (AI-AMC)</h1>
+        <p class="muted">2025.03 – 2025.11 · 中兴通讯 · AI 算法工程师</p>
+      </header>
+
+      <section class="card">
+        <h3>项目背景</h3>
+        <p>
+          在复杂动态变化的无线信道环境下，传统基于静态查表的 AMC 机制难以实现最优的频谱效率，
+          且容易面临信道快变导致的调度滞后问题。本项目用强化学习替代查表，实现<strong>链路自适应 (Link Adaptation)</strong> 的智能决策。
+        </p>
+      </section>
+
+      <section class="card">
+        <h3>核心算法（强化学习 &amp; DQN）</h3>
+        <ul class="bullets">
+          <li>设计并落地了基于 <strong>DQN</strong> 的智能调度算法，取代传统启发式规则。</li>
+          <li>实现了<strong>调制编码策略 (MCS)</strong> 与<strong>秩指示 (RI)</strong> 的联合动态分配。</li>
+          <li>将历史信道质量指示 (CQI)、信噪比 (SNR) 等通信指标抽象为状态空间，使智能体能够精准预测并输出最优策略。</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h3>模型调优与工程落地</h3>
+        <ul class="bullets">
+          <li><strong>Reward Shaping</strong>：为加速 DQN 在复杂状态空间下的收敛，引入了对数变换的奖励塑形机制，有效解决了强化学习中常见的奖励稀疏与抖动问题。</li>
+          <li><strong>Q-value 可视化</strong>：开发自动化脚本绘制 Q-value 热力图，直观监控模型在不同信道特征下的动作价值分布，指导探索策略的快速迭代。</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h3>业务收益</h3>
+        <ul class="bullets">
+          <li>算法有效适应了<strong>快衰落信道</strong>。</li>
+          <li>在保障底层通信链路可靠性（控制目标误块率）的前提下，<strong>显著提升系统的整体频谱效率</strong>和边缘用户的吞吐量。</li>
+        </ul>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2026 葛孟雨 · Ge Mengyu. Built as a learning project.</p>
+    </div>
+  </footer>
+</body>
+</html>

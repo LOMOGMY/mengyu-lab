@@ -15,9 +15,9 @@
       <nav class="nav-links" aria-label="主导航">
         <a href="#about">关于</a>
         <a href="#experience">经历</a>
-        <a href="#projects">项目</a>
+        <a href="projects/index.html">项目</a>
         <a href="#publications">论文</a>
-        <a href="#awards">荣誉</a>
+        <a href="blog/index.html">随笔</a>
         <a href="#contact">联系</a>
       </nav>
     </div>
@@ -137,13 +137,15 @@
     <section id="projects" class="section">
       <div class="container">
         <header class="section-header">
-          <h2>核心项目</h2>
-          <p>Selected Projects</p>
+          <h2>
+            <a href="projects/index.html" style="color: inherit;">核心项目 →</a>
+          </h2>
+          <p>Selected Projects · 点此查看全部</p>
         </header>
         <div class="grid grid-3">
-          <article class="card project">
+          <a class="card project project-card-link" href="projects/embodied-brain.html">
             <div class="card-meta"><span class="tag tag-vlm">VLM</span><span class="time">2025.03 – 至今</span></div>
-            <h3>EmbodiedBrain：具身智能 VLM 后训练</h3>
+            <h3>EmbodiedBrain：具身智能 VLM 后训练 →</h3>
             <p>
               参与 7B / 32B 模型研发与后训练全流程（SFT、GRPO、DAPO、GSPO）。
               主导落地 <strong>Step-GRPO</strong>，通过拆解长序列任务并引入前置步骤前缀，解决稀疏奖励问题。
@@ -154,11 +156,10 @@
             <p class="muted">
               32B 模型在 14 项基准测试达 SOTA，其中 VLM-PlanSim-99 取得 46.46% 成功率。
             </p>
-            <a class="card-link" href="https://zterobot.github.io/EmbodiedBrain.github.io/" target="_blank" rel="noopener">项目主页 →</a>
-          </article>
-          <article class="card project">
+          </a>
+          <a class="card project project-card-link" href="projects/ai-amc.html">
             <div class="card-meta"><span class="tag tag-rl">RL</span><span class="time">2025.03 – 2025.11</span></div>
-            <h3>5G/6G 智能自适应调制编码 (AI-AMC)</h3>
+            <h3>5G/6G 智能自适应调制编码 (AI-AMC) →</h3>
             <p>
               设计基于 DQN 的智能调度算法，联合优化 MCS 与 RI。
               引入对数变换的 Reward Shaping 解决奖励稀疏与抖动；通过 Q-value 热力图辅助迭代。
@@ -166,17 +167,17 @@
             <p class="muted">
               在保障误块率的前提下显著提升频谱效率与边缘用户吞吐量。
             </p>
-          </article>
-          <article class="card project">
+          </a>
+          <a class="card project project-card-link" href="projects/rb-scheduling.html">
             <div class="card-meta"><span class="tag tag-marl">MARL</span><span class="time">2025.06 – 2026.06</span></div>
-            <h3>簇间 RB 多智能体联合调度与干扰协调</h3>
+            <h3>簇间 RB 多智能体联合调度与干扰协调 →</h3>
             <p>
               将 RB 资源分配建模为 Dec-POMDP，主导落地 MAPPO 多智能体联合学习算法，实现 CTDE。
             </p>
             <p class="muted">
               中心化 Critic 评估全局干扰，指导 Actor 输出最优 RB 起始位置与连续分配策略，全局最小化多小区 RB 重叠面积。
             </p>
-          </article>
+          </a>
         </div>
       </div>
     </section>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>簇间 RB 调度 · 葛孟雨</title>
+  <meta name="description" content="5G/6G 多智能体联合资源调度与干扰协调项目。" />
+  <link rel="stylesheet" href="../styles/main.css" />
+  <link rel="stylesheet" href="../styles/page.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a href="../index.html" class="brand">葛孟雨<span class="brand-en">· Ge Mengyu</span></a>
+      <nav class="nav-links" aria-label="主导航">
+        <a href="../index.html#about">关于</a>
+        <a href="../index.html#experience">经历</a>
+        <a href="index.html">项目</a>
+        <a href="../index.html#publications">论文</a>
+        <a href="../blog/index.html">随笔</a>
+        <a href="../index.html#contact">联系</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-detail">
+    <div class="container">
+      <a class="back-link" href="index.html">← 返回项目列表</a>
+
+      <header class="page-header">
+        <span class="tag tag-marl">Multi-Agent RL</span>
+        <h1>簇间 RB 资源多智能体联合调度与干扰协调</h1>
+        <p class="muted">2025.06 – 2026.06 · 中兴通讯 · AI 算法工程师</p>
+      </header>
+
+      <section class="card">
+        <h3>项目背景与痛点</h3>
+        <p>
+          5G/6G 组网环境下，多个相邻小区需在固定 <strong>273 个 RB（资源块）</strong>构成的频谱空间内进行高频次资源抢占。
+          由于环境的<strong>局部可观测性</strong>（当前小区仅掌握自身实时需求及周边小区历史调度序列），
+          传统独立调度极易导致物理资源重叠与严重的簇间同频干扰。
+        </p>
+      </section>
+
+      <section class="card">
+        <h3>核心算法（MAPPO &amp; 多智能体协同）</h3>
+        <ul class="bullets">
+          <li>将该资源分配问题建模为<strong>去中心化部分可观测马尔可夫决策过程 (Dec-POMDP)</strong>。</li>
+          <li>主导落地了基于 <strong>MAPPO (Multi-Agent PPO)</strong> 的多智能体联合学习算法，实现多个小区基站的<strong>集中式训练与去中心化执行 (CTDE)</strong>。</li>
+          <li>完成了从单点局部决策到多智能体协同演进的跨越。</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h3>特征工程与状态空间设计</h3>
+        <ul class="bullets">
+          <li>深度定制智能体网络输入，精准融合了<strong>小区间干扰矩阵</strong>、周边小区历史 RB 调度数量、以及本小区实时 RB 需求。</li>
+          <li>通过<strong>中心化 Critic 网络</strong>评估全局交叉干扰状态，指导 Actor 网络输出最优的 RB 起始位置与连续分配策略。</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h3>业务收益</h3>
+        <ul class="bullets">
+          <li>算法有效打破了小区间的<strong>信息孤岛与博弈困境</strong>。</li>
+          <li>在保障各小区实时容量需求的前提下，实现了多小区 RB 资源重叠面积的<strong>全局最小化</strong>。</li>
+          <li>显著降低了系统级干扰，并提升了边缘用户体验。</li>
+        </ul>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2026 葛孟雨 · Ge Mengyu. Built as a learning project.</p>
+    </div>
+  </footer>
+</body>
+</html>
