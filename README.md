@@ -25,9 +25,10 @@ npx serve
 
 ```text
 mengyu-lab/
-├── AGENTS.md            ← 项目背景与协作约定
+├── AGENTS.md            ← 项目背景与协作约定（给 AI Agent 看）
 ├── README.md            ← 本文件
-├── docs/                ← 学习教程
+├── HANDOFF.md           ← ⭐ 完整交付文档（最重要！所有坑、命令、流程）
+├── docs/                ← 各阶段图文教程
 ├── db/
 │   └── schema.sql       ← D1 建表语句（在 Cloudflare 控制台执行）
 ├── wrangler.toml        ← Cloudflare Pages 配置
@@ -60,4 +61,4 @@ mengyu-lab/
 - HTML5 / CSS3 / 原生 JavaScript（无构建工具）
 - 部署平台：Cloudflare Pages
 
-详细学习路径见 [`AGENTS.md`](./AGENTS.md)。
+详细学习路径见 [`AGENTS.md`](./AGENTS.md)；完整的"从 0 到生产"步骤、所有踩坑清单见 [`HANDOFF.md`](./HANDOFF.md)。
